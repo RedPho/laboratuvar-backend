@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "laborantlar")
-public class Laborant {
+@Table(name="patients")
+public class Patient {
     @Id
     @GeneratedValue
     private long id;
@@ -15,18 +15,18 @@ public class Laborant {
 
     private String lastName;
 
-    private String hospitalIdentityNo;
+    private String tcNo;
 
-    @OneToMany(mappedBy = "laborant")
+    @OneToMany(mappedBy = "patient")
     private ArrayList<Report> reports;
 
-    public Laborant() {
+    public Patient() {
     }
 
-    public Laborant(String firstName, String lastName, String hospitalIdentityNo) {
+    public Patient(String firstName, String lastName, String tcNo) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.hospitalIdentityNo = hospitalIdentityNo;
+        this.tcNo = tcNo;
     }
 
     public long getId() {
@@ -53,12 +53,12 @@ public class Laborant {
         this.lastName = lastName;
     }
 
-    public String getHospitalIdentityNo() {
-        return hospitalIdentityNo;
+    public String getTcNo() {
+        return tcNo;
     }
 
-    public void setHospitalIdentityNo(String hospitalIdentityNo) {
-        this.hospitalIdentityNo = hospitalIdentityNo;
+    public void setTcNo(String tcNo) {
+        this.tcNo = tcNo;
     }
 
     public ArrayList<Report> getReports() {

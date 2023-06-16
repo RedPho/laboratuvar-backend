@@ -11,16 +11,13 @@ public class FileDB {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
-
     private String name;
-
     private String type;
-
     @Lob
     private byte[] data;
 
     @OneToOne(mappedBy = "fotograf")
-    private Rapor rapor;
+    private Report report;
 
     public FileDB() {
     }
