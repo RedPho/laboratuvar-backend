@@ -16,7 +16,7 @@ public class FileDB {
     @Lob
     private byte[] data;
 
-    @OneToOne(mappedBy = "fotograf")
+    @OneToOne(mappedBy = "fileDB")
     private Report report;
 
     public FileDB() {

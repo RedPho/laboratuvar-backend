@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PatientService {
@@ -21,6 +22,7 @@ public class PatientService {
     public Patient getById(Long id) {
         return patientRepository.findById(id).get();
     }
+    public List<Patient> getByFirstName(String firstName) { return patientRepository.findByFirstName(firstName); };
+    public List<Patient> getByLastName(String lastName) { return patientRepository.findByLastName(lastName); };
 
-    public ArrayList<Patient> getByNameSurname(String name)
 }
