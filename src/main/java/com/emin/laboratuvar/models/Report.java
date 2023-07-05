@@ -3,6 +3,7 @@ package com.emin.laboratuvar.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Entity
 @Table(name = "reports")
@@ -19,29 +20,32 @@ public class Report {
     @Column(name = "local_date_time", columnDefinition = "TIMESTAMP")
     private LocalDateTime localDateTime;
 
-    @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    private Patient patient;
+    private String patientFirstName;
+    private String patientLastName;
+    private String patientTcNo;
 
     @ManyToOne
     @JoinColumn(name = "laborant_id", nullable = false)
-    private Laborant laborant;
+    private Optional<Laborant> laborant;
 
     //file(photo of the report)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "filedb_id")
     private FileDB fileDB;
 
     public Report() {
     }
 
-    public Report(String diagnosisTitle, String diagnosisDetails, LocalDateTime localDateTime, Patient patient, Laborant laborant) {
+    public Report(String diagnosisTitle, String diagnosisDetails, LocalDateTime localDateTime, String patientFirstName, String patientLastName, String patientTcNo, Optional<Laborant> laborant) {
         this.diagnosisTitle = diagnosisTitle;
         this.diagnosisDetails = diagnosisDetails;
         this.localDateTime = localDateTime;
-        this.patient = patient;
+        this.patientFirstName = patientFirstName;
+        this.patientLastName = patientLastName;
+        this.patientTcNo = patientTcNo;
         this.laborant = laborant;
     }
+
 
     public long getId() {
         return id;
@@ -75,20 +79,36 @@ public class Report {
         this.localDateTime = localDateTime;
     }
 
-    public Patient getPatient() {
-        return patient;
+    public String getPatientFirstName() {
+        return patientFirstName;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
     }
 
-    public Laborant getLaborant() {
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
+    public String getPatientTcNo() {
+        return patientTcNo;
+    }
+
+    public void setPatientTcNo(String patientTcNo) {
+        this.patientTcNo = patientTcNo;
+    }
+
+    public Optional<Laborant> getLaborant() {
         return laborant;
     }
 
     public void setLaborant(Laborant laborant) {
-        this.laborant = laborant;
+        this.laborant = Optional.ofNullable(laborant);
     }
 
     public FileDB getFileDB() {

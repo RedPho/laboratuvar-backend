@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 
 @Entity
-@Table(name = "laborantlar")
+@Table(name = "laborants")
 public class Laborant {
     @Id
     @GeneratedValue

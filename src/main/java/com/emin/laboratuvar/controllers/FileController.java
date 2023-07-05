@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
-@CrossOrigin("http://localhost:8081")
 public class FileController {
 
     @Autowired
