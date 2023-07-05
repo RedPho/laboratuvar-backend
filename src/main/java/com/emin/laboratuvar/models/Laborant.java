@@ -3,6 +3,7 @@ package com.emin.laboratuvar.models;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "laborants")
@@ -15,10 +16,11 @@ public class Laborant {
 
     private String lastName;
 
+
     private String hospitalIdentityNo;
 
     @OneToMany(mappedBy = "laborant")
-    private ArrayList<Report> reports;
+    private List<Report> reports;
 
     public Laborant() {
     }
@@ -61,11 +63,11 @@ public class Laborant {
         this.hospitalIdentityNo = hospitalIdentityNo;
     }
 
-    public ArrayList<Report> getReports() {
+    public List<Report> getReports() {
         return reports;
     }
 
-    public void setReports(ArrayList<Report> reports) {
+    public void setReports(List<Report> reports) {
         this.reports = reports;
     }
 }

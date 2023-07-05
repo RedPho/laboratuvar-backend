@@ -3,7 +3,6 @@ package com.emin.laboratuvar.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Entity
 @Table(name = "reports")
@@ -24,9 +23,9 @@ public class Report {
     private String patientLastName;
     private String patientTcNo;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "laborant_id", nullable = false)
-    private Optional<Laborant> laborant;
+    private Laborant laborant;
 
     //file(photo of the report)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -36,7 +35,7 @@ public class Report {
     public Report() {
     }
 
-    public Report(String diagnosisTitle, String diagnosisDetails, LocalDateTime localDateTime, String patientFirstName, String patientLastName, String patientTcNo, Optional<Laborant> laborant) {
+    public Report(String diagnosisTitle, String diagnosisDetails, LocalDateTime localDateTime, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant) {
         this.diagnosisTitle = diagnosisTitle;
         this.diagnosisDetails = diagnosisDetails;
         this.localDateTime = localDateTime;
@@ -103,12 +102,12 @@ public class Report {
         this.patientTcNo = patientTcNo;
     }
 
-    public Optional<Laborant> getLaborant() {
+    public Laborant getLaborant() {
         return laborant;
     }
 
     public void setLaborant(Laborant laborant) {
-        this.laborant = Optional.ofNullable(laborant);
+        this.laborant = laborant;
     }
 
     public FileDB getFileDB() {

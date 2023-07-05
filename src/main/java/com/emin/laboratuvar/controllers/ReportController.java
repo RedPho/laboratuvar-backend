@@ -43,10 +43,10 @@ public class ReportController {
 
     @GetMapping("/reports/{id}")
     public ResponseEntity<Report> getPatientById(@PathVariable("id") long id) {
-        Optional<Report> patientData = reportService.getById(id);
+        Optional<Report> reportData = reportService.getById(id);
 
-        if (patientData.isPresent()) {
-            return new ResponseEntity<>(patientData.get(), HttpStatus.OK);
+        if (reportData.isPresent()) {
+            return new ResponseEntity<>(reportData.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

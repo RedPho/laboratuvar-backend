@@ -19,7 +19,7 @@ public class ReportService {
     private LaborantService laborantService;
 
 
-    public Report store(String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Optional<Laborant> laborant) {
+    public Report store(String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant) {
         Report report = new Report(diagnosisTitle, diagnosisDetails, LocalDateTime.now(), patientFirstName, patientLastName, patientTcNo, laborant);
         return reportRepository.save(report);
 
