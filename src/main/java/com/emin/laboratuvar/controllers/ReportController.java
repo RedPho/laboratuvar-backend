@@ -62,12 +62,24 @@ public class ReportController {
         }
     }
     @DeleteMapping("/reports/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+    public ResponseEntity<HttpStatus> deleteReport(@PathVariable("id") long id) {
         try {
             reportService.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/reports/{id}")
+    public ResponseEntity<Report> updateReport(@PathVariable("id") long id, @RequestBody Report report) {
+        Optional<Report> reportData = reportService.getById(id);
+
+        if (reportData.isPresent()) {
+            Report _report = reportService.update(id, report.getDiagnosisTitle(), report.getDiagnosisDetails(), report.getPatientFirstName(), report.getPatientLastName(), report.getPatientTcNo(), report.getLaborant());
+            return new ResponseEntity<>(_report, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

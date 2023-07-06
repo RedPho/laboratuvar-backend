@@ -25,6 +25,23 @@ public class ReportService {
 
     }
 
+    public Report update(Long id, String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant) {
+        Optional<Report> report = reportRepository.findById(id);
+        if (report.isPresent()) {
+            Report reportObj = report.get();
+            reportObj.setDiagnosisTitle(diagnosisTitle);
+            reportObj.setDiagnosisDetails(diagnosisDetails);
+            reportObj.setPatientFirstName(patientFirstName);
+            reportObj.setPatientLastName(patientLastName);
+            reportObj.setPatientTcNo(patientTcNo);
+            reportObj.setLaborant(laborant);
+            reportObj.setLocalDateTime(LocalDateTime.now());
+            return reportObj;
+        } else {
+            return null;
+        }
+    }
+
     public Optional<Report> getById(long id) {
         return reportRepository.findById(id);
     }
