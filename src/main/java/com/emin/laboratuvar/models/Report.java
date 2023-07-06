@@ -1,5 +1,5 @@
 package com.emin.laboratuvar.models;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,8 +23,9 @@ public class Report {
     private String patientLastName;
     private String patientTcNo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "laborant_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "laborant_id")
+    @JsonIgnoreProperties({"reports"}) // ayni json icinde birbirini tekrar eden propertyler olmamasi icin(x verisi icinde y verisi var. y verisi icinde de x verisi olunca y{x{y{x{y...}}}} diye bir sonsuz dongu olusmakta.)
     private Laborant laborant;
 
     //file(photo of the report)

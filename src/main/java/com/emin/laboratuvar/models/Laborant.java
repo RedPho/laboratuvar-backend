@@ -1,5 +1,7 @@
 package com.emin.laboratuvar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class Laborant {
     private String hospitalIdentityNo;
 
     @OneToMany(mappedBy = "laborant")
+    @JsonIgnoreProperties({"laborant"})
     private List<Report> reports;
 
     public Laborant() {
