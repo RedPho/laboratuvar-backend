@@ -5,6 +5,7 @@ import com.emin.laboratuvar.models.Report;
 import com.emin.laboratuvar.services.LaborantService;
 import com.emin.laboratuvar.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin
 @Controller
 public class LaborantController {
     @Autowired
@@ -55,6 +57,7 @@ public class LaborantController {
 
     @PostMapping("/laborants")
     public ResponseEntity createLaborant(@RequestBody Laborant laborant) {
+        HttpHeaders responseHeaders = new HttpHeaders();
         try {
             Laborant _laborant = laborantService.store(laborant.getFirstName(), laborant.getLastName(), laborant.getHospitalIdentityNo());
             return new ResponseEntity<>(_laborant, HttpStatus.CREATED);
