@@ -31,12 +31,13 @@ public class Report {
     //file(photo of the report)
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "filedb_id")
+    @JsonIgnoreProperties({"report"})
     private FileDB fileDB;
 
     public Report() {
     }
 
-    public Report(String diagnosisTitle, String diagnosisDetails, LocalDateTime localDateTime, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant) {
+    public Report(String diagnosisTitle, String diagnosisDetails, LocalDateTime localDateTime, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant, FileDB fileDB) {
         this.diagnosisTitle = diagnosisTitle;
         this.diagnosisDetails = diagnosisDetails;
         this.localDateTime = localDateTime;
@@ -44,6 +45,7 @@ public class Report {
         this.patientLastName = patientLastName;
         this.patientTcNo = patientTcNo;
         this.laborant = laborant;
+        this.fileDB = fileDB;
     }
 
 

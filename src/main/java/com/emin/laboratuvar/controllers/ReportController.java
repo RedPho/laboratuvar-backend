@@ -56,7 +56,7 @@ public class ReportController {
     @PostMapping("/reports")
     public ResponseEntity createPatient(@RequestBody Report report) {
         try {
-            Report _report = reportService.store(report.getDiagnosisTitle(), report.getDiagnosisDetails(), report.getPatientFirstName(), report.getPatientLastName(), report.getPatientTcNo(), report.getLaborant());
+            Report _report = reportService.store(report.getDiagnosisTitle(), report.getDiagnosisDetails(), report.getPatientFirstName(), report.getPatientLastName(), report.getPatientTcNo(), report.getLaborant(), report.getFileDB());
             return new ResponseEntity<>(_report, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

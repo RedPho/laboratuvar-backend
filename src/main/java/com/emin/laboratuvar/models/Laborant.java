@@ -22,7 +22,7 @@ public class Laborant {
     private String hospitalIdentityNo;
 
     @OneToMany(mappedBy = "laborant")
-    @JsonIgnoreProperties({"laborant"})
+    @JsonIgnoreProperties({"laborant", "fileDB"})
     private List<Report> reports;
 
     public Laborant() {

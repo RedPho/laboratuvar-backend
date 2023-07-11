@@ -26,10 +26,10 @@ public class FileController {
     public ResponseEntity uploadFile(@RequestParam("file") MultipartFile file) {
         String message = "";
         try {
-            storageService.store(file);
+            FileDB storedFile = storageService.store(file);
 
             message = "Dosya basariyla yuklendi: " + file.getOriginalFilename();
-            return new ResponseEntity(message, HttpStatus.OK);
+            return new ResponseEntity<>(storedFile.getId(), HttpStatus.CREATED);
         } catch (Exception e) {
             message = "Dosya yuklenirken bir hata olustu: " + file.getOriginalFilename() + "!";
             return new ResponseEntity(message, HttpStatus.EXPECTATION_FAILED);
@@ -37,7 +37,7 @@ public class FileController {
     }
 
     @GetMapping("/files/{id}")
-    public ResponseEntity<byte[]> getFile(@PathVariable String id) {
+    public ResponseEntity<byte[]> getFile(@PathVariable long id) {
         FileDB fileDB = storageService.getFile(id);
 
         return ResponseEntity.ok()

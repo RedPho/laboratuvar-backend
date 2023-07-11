@@ -1,5 +1,6 @@
 package com.emin.laboratuvar.services;
 
+import com.emin.laboratuvar.models.FileDB;
 import com.emin.laboratuvar.models.Laborant;
 import com.emin.laboratuvar.models.Report;
 import com.emin.laboratuvar.repositories.ReportRepository;
@@ -19,8 +20,8 @@ public class ReportService {
     private LaborantService laborantService;
 
 
-    public Report store(String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant) {
-        Report report = new Report(diagnosisTitle, diagnosisDetails, LocalDateTime.now(), patientFirstName, patientLastName, patientTcNo, laborant);
+    public Report store(String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant, FileDB fileDB) {
+        Report report = new Report(diagnosisTitle, diagnosisDetails, LocalDateTime.now(), patientFirstName, patientLastName, patientTcNo, laborant, fileDB);
         return reportRepository.save(report);
 
     }

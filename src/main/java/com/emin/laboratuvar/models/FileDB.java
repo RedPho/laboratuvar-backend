@@ -1,5 +1,6 @@
 package com.emin.laboratuvar.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -8,15 +9,15 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "files")
 public class FileDB {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    private String id;
+    @GeneratedValue
+    private long id;
     private String name;
     private String type;
     @Lob
     private byte[] data;
 
     @OneToOne(mappedBy = "fileDB")
+    @JsonIgnoreProperties({"fileDB"})
     private Report report;
 
     public FileDB() {
@@ -28,8 +29,12 @@ public class FileDB {
         this.data = data;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

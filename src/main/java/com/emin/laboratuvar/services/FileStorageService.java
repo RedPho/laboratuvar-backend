@@ -24,7 +24,7 @@ public class FileStorageService {
         return fileDBRepository.save(FileDB);
     }
 
-    public FileDB getFile(String id) {
+    public FileDB getFile(long id) {
         return fileDBRepository.findById(id).get();
     }
 }
