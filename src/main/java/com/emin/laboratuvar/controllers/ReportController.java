@@ -20,7 +20,6 @@ public class ReportController {
     private ReportService reportService;
     @GetMapping("/reports")
     public ResponseEntity<List<Report>> getAllPatients(@RequestParam(required = false) String queryParameter) {
-        System.out.println("PARAMETRE GELDI:" + queryParameter);
         try {
             List<Report> reports = new ArrayList<Report>();
             if (queryParameter == "" || queryParameter == null) {
@@ -74,9 +73,8 @@ public class ReportController {
     @PutMapping("/reports/{id}")
     public ResponseEntity<Report> updateReport(@PathVariable("id") long id, @RequestBody Report report) {
         Optional<Report> reportData = reportService.getById(id);
-
         if (reportData.isPresent()) {
-            Report _report = reportService.update(id, report.getDiagnosisTitle(), report.getDiagnosisDetails(), report.getPatientFirstName(), report.getPatientLastName(), report.getPatientTcNo(), report.getLaborant());
+            Report _report = reportService.update(id, report.getDiagnosisTitle(), report.getDiagnosisDetails(), report.getPatientFirstName(), report.getPatientLastName(), report.getPatientTcNo(), report.getLaborant(), report.getFileDB());
             return new ResponseEntity<>(_report, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

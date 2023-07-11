@@ -26,7 +26,7 @@ public class ReportService {
 
     }
 
-    public Report update(Long id, String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant) {
+    public Report update(Long id, String diagnosisTitle, String diagnosisDetails, String patientFirstName, String patientLastName, String patientTcNo, Laborant laborant, FileDB fileDB) {
         Optional<Report> report = reportRepository.findById(id);
         if (report.isPresent()) {
             Report reportObj = report.get();
@@ -37,8 +37,12 @@ public class ReportService {
             reportObj.setPatientTcNo(patientTcNo);
             reportObj.setLaborant(laborant);
             reportObj.setLocalDateTime(LocalDateTime.now());
+            reportObj.setFileDB(fileDB);
+            reportRepository.save(reportObj);
+            System.out.println("Guncellendi");
             return reportObj;
         } else {
+            System.out.println("Olmadi");
             return null;
         }
     }
