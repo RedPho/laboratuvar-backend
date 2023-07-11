@@ -29,7 +29,7 @@ public class Report {
     private Laborant laborant;
 
     //file(photo of the report)
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "filedb_id")
     @JsonIgnoreProperties({"report"})
     private FileDB fileDB;
@@ -119,5 +119,10 @@ public class Report {
 
     public void setFileDB(FileDB fileDB) {
         this.fileDB = fileDB;
+    }
+
+    @Override
+    public String toString() {
+        return "id:" + this.getId() + "\ndiagnosis title:" + this.getDiagnosisTitle() + "\n diagnosis details:" + this.getDiagnosisDetails() + "\ntime:" + this.getLocalDateTime() + "\npatient first name:" + this.getPatientFirstName() + "\npatient last name:" + this.getPatientLastName() + "\npatient tc no:" + this.getPatientTcNo() + "\nlaborant:" + this.getLaborant().getId() + "\nfile:" + this.getFileDB().getId();
     }
 }

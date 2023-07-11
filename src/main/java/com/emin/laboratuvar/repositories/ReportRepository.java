@@ -11,5 +11,5 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 
     List<Report> findByPatientFirstNameContaining(String firstName);
     List<Report> findByPatientLastNameContaining(String lastName);
-    Report findByPatientTcNo(String tcNo);
+    List<Report> findByPatientTcNo(String tcNo);
 }

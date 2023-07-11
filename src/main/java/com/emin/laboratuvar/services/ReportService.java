@@ -49,7 +49,8 @@ public class ReportService {
     public List<Report> getByPatientFirstNameContaining(String firstName) { return reportRepository.findByPatientFirstNameContaining(firstName); };
     public List<Report> getByPatientLastNameContaining(String lastName) { return reportRepository.findByPatientLastNameContaining(lastName); };
 
-    public Report getByPatientTcNo(String tcNo) { return reportRepository.findByPatientTcNo(tcNo); };
+    public List<Report> getByPatientTcNo(String tcNo) { return reportRepository.findByPatientTcNo(tcNo); };
+
 
     public List<Report> findAll() {
         return reportRepository.findAll();
