@@ -31,7 +31,7 @@ public class LaborantController {
             else {
                 laborants.addAll(laborantService.getByFirstNameContaining(queryParameter));
                 laborants.addAll(laborantService.getByLastNameContaining(queryParameter));
-                laborants.add(laborantService.getByHospitalIdentityNo(queryParameter));
+                laborants.addAll(laborantService.getByHospitalIdentityNo(queryParameter));
             }
             if (laborants.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);

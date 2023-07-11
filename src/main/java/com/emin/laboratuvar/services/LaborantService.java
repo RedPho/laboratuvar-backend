@@ -29,7 +29,7 @@ public class LaborantService {
     public List<Laborant> getByFirstNameContaining(String firstName) { return laborantRepository.findByFirstNameContaining(firstName); };
     public List<Laborant> getByLastNameContaining(String lastName) { return laborantRepository.findByLastNameContaining(lastName); };
 
-    public Laborant getByHospitalIdentityNo(String hospitalIdentityNo) { return laborantRepository.findByHospitalIdentityNo(hospitalIdentityNo); };
+    public List<Laborant> getByHospitalIdentityNo(String hospitalIdentityNo) { return laborantRepository.findByHospitalIdentityNo(hospitalIdentityNo); };
 
     public List<Laborant> findAll() {
         return laborantRepository.findAll();

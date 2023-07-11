@@ -10,5 +10,5 @@ import java.util.List;
 public interface LaborantRepository extends JpaRepository<Laborant, Long> {
     List<Laborant> findByFirstNameContaining(String firstName);
     List<Laborant> findByLastNameContaining(String lastName);
-    Laborant findByHospitalIdentityNo(String hospitalIdentityNo);
+    List<Laborant> findByHospitalIdentityNo(String hospitalIdentityNo);
 }

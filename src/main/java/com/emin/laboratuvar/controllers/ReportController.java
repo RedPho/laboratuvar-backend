@@ -1,6 +1,8 @@
 package com.emin.laboratuvar.controllers;
 
+import com.emin.laboratuvar.models.Laborant;
 import com.emin.laboratuvar.models.Report;
+import com.emin.laboratuvar.services.LaborantService;
 import com.emin.laboratuvar.services.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @Controller
@@ -18,6 +20,9 @@ public class ReportController {
 
     @Autowired
     private ReportService reportService;
+
+    @Autowired
+    private LaborantService laborantService;
     @GetMapping("/reports")
     public ResponseEntity<List<Report>> getAllPatients(@RequestParam(required = false) String queryParameter) {
         try {
@@ -26,13 +31,28 @@ public class ReportController {
                 reports.addAll(reportService.findAll());
             }
             else {
+                List<Laborant> laborants = new ArrayList<Laborant>();
                 reports.addAll(reportService.getByPatientFirstNameContaining(queryParameter));
                 reports.addAll(reportService.getByPatientLastNameContaining(queryParameter));
                 reports.addAll(reportService.getByPatientTcNo(queryParameter));
+                laborants.addAll(laborantService.getByFirstNameContaining(queryParameter));
+                laborants.addAll(laborantService.getByLastNameContaining(queryParameter));
+                laborants.addAll(laborantService.getByHospitalIdentityNo(queryParameter));
+                for (Laborant l : laborants) {
+                    reports.addAll(l.getReports());
+                }
+
             }
             if (reports.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+            reports = reports.stream().distinct().collect(Collectors.toList()); // remove duplicates (if first and lastname both contain the query string)
+            Collections.sort(reports, new Comparator<Report>() {
+                @Override
+                public int compare(Report o1, Report o2) {
+                    return o1.getLocalDateTime().compareTo(o2.getLocalDateTime());
+                }
+            });
             return new ResponseEntity<>(reports, HttpStatus.OK);
         } catch (Exception e) {
             System.out.println("ERROR:" + e);
