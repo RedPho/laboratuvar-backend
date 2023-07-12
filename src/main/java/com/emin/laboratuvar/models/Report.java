@@ -14,6 +14,7 @@ public class Report {
 
     private String diagnosisTitle;
 
+    @Lob
     private String diagnosisDetails;
 
     @Column(name = "local_date_time", columnDefinition = "TIMESTAMP")
