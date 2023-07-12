@@ -1,10 +1,10 @@
 # Laboratuvar Rest API
 
-Bu repo örnek bir laboratuvar reporlama uygulamasının Back-end servisini içerir.
+This repo contains the Back-end service of a sample lab reporting application.
 
 ## Getting Started
 
-Bu Back-end uygulaması hasta ve rapor/tanı bilgilerinin depolanmasını ve bu verilere daha sonrasında ulaşılmasını sağlar.
+This Back-end application allows storing patient and report/diagnostic information and accessing this data later.
 
 ### This project uses
 ```
