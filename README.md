@@ -58,3 +58,4 @@ spring.h2.console.path=/h2-ui //this is dashboard url path for database gui
 | DELETE | /reports/{id}                | Delete report by id                                                                                    |
 | PUT    | /reports/{id}              | Update report by id                                                                                    |
 
+Sample Front-End Application uses this api: https://github.com/RedPho/laboratuvar-frontend
