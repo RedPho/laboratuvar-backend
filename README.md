@@ -28,7 +28,7 @@ mvn spring-boot:run
 
 I used H2 because you don't need to setup anything with it. It is good for easy testing.
 The app will start running at http://localhost:8080 and uses in-memory database by default. 
-If you want to save database(use file based storage) when application be closed, you can configure /src/main/resource/application.properties:
+If you want to save database(use file based storage) when application is closed, you can configure /src/main/resource/application.properties:
 ```
 spring.datasource.url=jdbc:h2:mem:testdb // If you want to save database, change here to this format: jdbc:h2:file:/examplepath/data
 spring.datasource.driverClassName=org.h2.Driver
